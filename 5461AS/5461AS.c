@@ -6,8 +6,9 @@
 
 #include "5461AS.h"
 #include "DataTypes.h"
-#include "dio_reg.h"
 #include "BitConfig.h"
+#include "dio.h"
+
 
 
 static Uch8 NumArr[numbers][segments] = NumbersOnBinary;
@@ -15,172 +16,17 @@ static Uch8 CarArr[caracters][segments] = CaractersOnBinary;
 
 void segement_dir(PinConfig seg_arr[segments])
 {
-    switch (seg_arr[a].ddr)
+    for (int i = 0; i < segments; i++)
     {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, seg_arr[a].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, seg_arr[a].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, seg_arr[a].pin);
-        break;
-    }
-    
-    switch (seg_arr[b].ddr)
-    {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, seg_arr[b].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, seg_arr[b].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, seg_arr[b].pin);
-        break;
-    }
-
-    switch (seg_arr[c].ddr)
-    {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, seg_arr[c].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, seg_arr[c].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, seg_arr[c].pin);
-        break;
-    }
-
-    switch (seg_arr[d].ddr)
-    {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, seg_arr[d].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, seg_arr[d].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, seg_arr[d].pin);
-        break;
-    }
-
-    switch (seg_arr[e].ddr)
-    {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, seg_arr[e].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, seg_arr[e].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, seg_arr[e].pin);
-        break;
-    }
-
-    switch (seg_arr[f].ddr)
-    {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, seg_arr[f].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, seg_arr[f].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, seg_arr[f].pin);
-        break;
-    }
-
-    switch (seg_arr[g].ddr)
-    {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, seg_arr[g].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, seg_arr[g].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, seg_arr[g].pin);
-        break;
+        configure_pin_direction(seg_arr[i]);
     }
 }
 
 void digit_dir(PinConfig d_arr[digits])
 {
-    switch (d_arr[d1].ddr)
+    for (int i = 0; i < digits; i++)
     {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, d_arr[d1].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, d_arr[d1].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, d_arr[d1].pin);
-        break;
-    }
-
-    switch (d_arr[d2].ddr)
-    {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, d_arr[d2].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, d_arr[d2].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, d_arr[d2].pin);
-        break;
-    }
-
-    switch (d_arr[d3].ddr)
-    {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, d_arr[d3].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, d_arr[d3].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, d_arr[d3].pin);
-        break;
-    }
-
-    switch (d_arr[d4].ddr)
-    {
-        case Reg_B :
-        SET_VAL_BIT(DDRB, d_arr[d4].pin);
-        break;
-
-        case Reg_C :
-        SET_VAL_BIT(DDRC, d_arr[d4].pin);
-        break;
-
-        case Reg_D :
-        SET_VAL_BIT(DDRD, d_arr[d4].pin);
-        break;
+        configure_pin_direction(d_arr[i]);
     }
 }
 
