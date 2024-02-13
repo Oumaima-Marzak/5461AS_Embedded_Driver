@@ -39,28 +39,12 @@
 
 #include "DataTypes.h"
 
-typedef struct 
-{
-    
-    Uch8 pin;
-    Uch8 ddr;
-    Uch8 port;
 
-} PinConfig;
+#define numbers    10  /* 0 to 9 */
+#define caracters   4  /* A, C, E and F */ 
+#define segments    7  /* a, b, c, d, e, f and g */
 
-/* PORT in Atmega328p */
-#define Reg_B 0
-#define Reg_C 1
-#define Reg_D 2
-
-#define HIGH 1
-#define LOW  0
-
-#define numbers    10
-#define caracters  4
-#define segments   7
-
-#define digits 4
+#define digits 4       /* d1, d2, d3 and d4 */
 
 #define a  0
 #define b  1
