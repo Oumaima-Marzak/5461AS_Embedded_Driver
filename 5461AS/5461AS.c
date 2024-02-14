@@ -81,42 +81,66 @@ void digit_init(PinConfig d_arr[digits])
     }    
 }
 
-void display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 number)
+ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 number)
 {
-    digit_state(d_arr[digit - 1]); // Set digit state
     
-    if (number >= 0 && number <= 9)
+    if (digit < 1 || digit > digits + 1 || number < 0 || number > numbers)
     {
-        for (int i = 0; i < segments; i++)
-        {
-            segement_state(seg_arr[i], NumArr[number][i]);
-        }
+        return _INVALID_PARAM;
     }
+
+    else 
+    {
+        digit_state(d_arr[digit - 1]); 
+    
+        if (number >= 0 && number <= 9)
+        {
+            for (int i = 0; i < segments; i++)
+            {
+                segement_state(seg_arr[i], NumArr[number][i]);
+            }
+        }
+
+        return _OK;
+    }
+
 }
 
-void display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 caracter)
+ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 caracter)
 {
-    digit_state(d_arr[digit - 1]); // Set digit state
-
-    Uch8 charIndex = 0;
-
-    switch (caracter) {
-        case 'A':
-            charIndex = 0;
-            break;
-        case 'C':
-            charIndex = 1;
-            break;
-        case 'E':
-            charIndex = 2;
-            break;
-        case 'F':
-            charIndex = 3;
-            break;
+    if (digit < 1 || digit > digits + 1 )
+    {
+        return _INVALID_PARAM;
     }
 
-    for (int i = 0; i < segments; i++) {
-        segement_state(seg_arr[i], CarArr[charIndex][i]);
+    else 
+    {
+        digit_state(d_arr[digit - 1]); // Set digit state
+
+        Uch8 charIndex = 0;
+
+        switch (caracter) {
+            case 'A':
+                charIndex = 0;
+                break;
+            case 'C':
+                charIndex = 1;
+                break;
+            case 'E':
+                charIndex = 2;
+                break;
+            case 'F':
+                charIndex = 3;
+                break;
+        }
+
+        for (int i = 0; i < segments; i++) 
+        {
+            segement_state(seg_arr[i], CarArr[charIndex][i]);
+        }
+
+        return _OK;
+
     }
 
 }
