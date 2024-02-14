@@ -39,6 +39,13 @@
 
 #include "DataTypes.h"
 
+typedef enum 
+{
+    _OK,
+    _INVALID_PARAM
+
+} ErrorStatus;
+
 
 #define numbers    10  /* 0 to 9 */
 #define caracters   4  /* A, C, E and F */ 
@@ -80,8 +87,8 @@ void digit_state(PinConfig DIG);
 
 void digit_init(PinConfig d_arr[digits]);
 
-void display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit,Uch8 number);
-void display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 caracter);
+ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit,Uch8 number);
+ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 caracter);
 
 
 #endif
