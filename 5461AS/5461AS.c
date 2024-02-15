@@ -10,7 +10,6 @@
 #include "dio.h"
 
 
-
 static Uch8 NumArr[numbers][segments] = NumbersOnBinary;
 static Uch8 CarArr[caracters][segments] = CaractersOnBinary;
 
@@ -30,6 +29,14 @@ void digit_dir(PinConfig d_arr[digits])
     }
 }
 
+void dp_dir(PinConfig dp_arr[dp])
+{
+    for (int i = 0; i < dp; i++)
+    {
+        configure_pin_direction(dp_arr[i]);
+    }
+}
+
 void segement_state(PinConfig SEG, Uch8 STATE)
 {
     configure_pin_state(SEG, STATE);
@@ -37,47 +44,19 @@ void segement_state(PinConfig SEG, Uch8 STATE)
 
 void digit_state(PinConfig DIG)
 {
-    switch (DIG.port)
-    {
-        case Reg_B:
+    clear_pin_state(DIG);
+}
 
-        CLEAR_VAL_BIT(PORTB, DIG.pin);
-
-        break;
-
-        case Reg_C:
-
-        CLEAR_VAL_BIT(PORTC, DIG.pin); 
-
-        break;
-
-        case Reg_D:
-        
-        CLEAR_VAL_BIT(PORTD, DIG.pin); 
-
-        break;
-    
-    }
+void dp_state(PinConfig dp_x, Uch8 STATE)
+{
+    configure_pin_state(dp_x, STATE);
 }
 
 void digit_init(PinConfig d_arr[digits])
 {
     for (int i = 0; i < digits; i++)
     {
-        switch (d_arr[i].port)
-        {
-            case Reg_B :
-            SET_VAL_BIT(PORTB, d_arr[i].pin);
-            break;
-
-            case Reg_C :
-            SET_VAL_BIT(PORTC, d_arr[i].pin);
-            break;
-
-            case Reg_D :
-            SET_VAL_BIT(PORTD, d_arr[i].pin);
-            break;
-        }
+        set_pin_state(d_arr[i]);
     }    
 }
 
