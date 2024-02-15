@@ -52,6 +52,7 @@ typedef enum
 #define segments    7  /* a, b, c, d, e, f and g */
 
 #define digits 4       /* d1, d2, d3 and d4 */
+#define dp     4
 
 #define a  0
 #define b  1
@@ -78,14 +79,17 @@ typedef enum
 /* Caracters A,C,E and F */
 #define CaractersOnBinary {{1,1,1,0,1,1,1}, {1,0,0,1,1,1,0}, {1,0,0,1,1,1,1}, {1,0,0,0,1,1,1}}
 
+void digit_init(PinConfig d_arr[digits]);
 
 void segement_dir(PinConfig seg_arr[segments]);
 void digit_dir(PinConfig d_arr[digits]);
+void dp_dir(PinConfig dp_arr[dp]);
+
 
 void segement_state(PinConfig SEG, Uch8 STATE);
 void digit_state(PinConfig DIG);
+void dp_state(PinConfig dp_x, Uch8 STATE);
 
-void digit_init(PinConfig d_arr[digits]);
 
 ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit,Uch8 number);
 ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 caracter);
