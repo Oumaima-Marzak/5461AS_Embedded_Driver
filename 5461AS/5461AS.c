@@ -63,14 +63,14 @@ void digit_init(PinConfig d_arr[digits])
 ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 number)
 {
     
-    if (digit < 1 || digit > digits + 1 || number < 0 || number > numbers)
+    if (digit < 0 || digit > digits  || number < 0 || number > numbers)
     {
         return _INVALID_PARAM;
     }
 
     else 
     {
-        digit_state(d_arr[digit - 1]); 
+        digit_state(d_arr[digit]); 
     
         if (number >= 0 && number <= 9)
         {
@@ -94,7 +94,7 @@ ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits
 
     else 
     {
-        digit_state(d_arr[digit - 1]); // Set digit state
+        digit_state(d_arr[digit]); // Set digit state
 
         Uch8 charIndex = 0;
 
