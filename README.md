@@ -3,10 +3,11 @@
 
 ## 1. Introduction
  The 5461AS is a model of 7-segment LED display that consists of 4 digit (DIG1..4), each one controls 7-segments labeled A though G and a decimal point (dp). 
- 
+
 ![Alt text](<Screenshot from 2024-02-18 18-19-28.png>)
 
- 
+![Alt text](<Screenshot from 2024-02-18 18-26-49.png>)
+
  These displays are widely used in various electronic projects and devices for displaying numerical information. They are relatively simple to interface with microcontrollers and are often used in digital clocks, timers, counters and other similar applications. 
 
 
