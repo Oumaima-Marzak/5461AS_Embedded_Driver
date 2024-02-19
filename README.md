@@ -206,7 +206,7 @@ void digit_state(PinConfig DIG)
 }
 ```
 
-### 3.4. display initialisation 
+### 3.4. display initialization 
 
 - digit-init(): This function initializes all digit pins (DIG1-4) of the 5461AS display to a predefined state.
 
