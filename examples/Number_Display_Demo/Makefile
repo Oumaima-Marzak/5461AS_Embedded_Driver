@@ -1,4 +1,4 @@
-# Define your source code file and the target name
+# Define source code files path variables
 SRC_DIR = /home/oumaima/Desktop/5461AS_Embedded_Driver/examples/Number_Display_Demo
 SSEG_DIR = /home/oumaima/Desktop/5461AS_Embedded_Driver/5461AS
 DIO_DIR = /home/oumaima/Desktop/Atmega328p_Drivers/DIO
