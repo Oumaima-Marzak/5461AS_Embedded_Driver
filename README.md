@@ -1,6 +1,5 @@
 # 5461AS_Embedded_Driver
 
-
 ## 1. Introduction
 
  The 5461AS is a common model of 7-segment LED displays widely utilized in various electronic projects and devices. Each display comprises four digits (DIG1..4), with each digit controlling seven segments labeled A through G and a decimal point (dp). These displays find applications in digital clocks, timers, counters, and similar devices for displaying numerical information.
@@ -33,12 +32,20 @@
 
  This driver ensures compatibility with various microcontroller platforms, making it suitable for a wide range of hardware configurations. 
 
-## 3. Requirements
+## 3. Driver Documentation
+### 3.1. display numbers & caracters
 
-## 4. Driver Documentation
-### 4.1. display numbers & caracters
+- display_number(): This function displays a numeric number (0-9) on a specified digit of the 5461AS display. 
 
-- display_number();
+    Function variables :
+
+    - PinConfig seg_arr[segments]: An array of PinConfig structures representing the segment pins (A-G) of the 5461AS display.
+
+    - PinConfig d_arr[digits]: An array of PinConfig structures representing the digit pins (DIG1-4) of the 5461AS display.
+
+    - Uch8 digit: The digit (DIG1-4) on which to display the number.
+
+    - Uch8 number: The number (0-9) to display on the specified digit.
 
 ```
 ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 number)
@@ -66,7 +73,17 @@ ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits],
 }    
 
 ```
-- display_caracter();
+- display_caracter(): This function displays a character ('A', 'C', 'E', or 'F') on a specified digit of the 5461AS display.
+
+    Function variables :
+
+    - PinConfig seg_arr[segments]: An array of PinConfig structures representing the segment pins (A-G) of the 5461AS display.
+
+    - PinConfig d_arr[digits]: An array of PinConfig structures representing the digit pins (DIG1-4) of the 5461AS display.
+
+    - Uch8 digit: The digit (DIG1-4) on which to display the character.
+
+    - Uch8 caracter: The character ('A', 'C', 'E', or 'F') to display on the specified digit.
 
 ```
 ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 caracter)
@@ -110,32 +127,9 @@ ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits
 
 ```
 
-### 4.2. segment, dp & digit direction
+### 3.2. segment, dp & digit direction
 
-- configure_pin_direction();
-
-```
-void configure_pin_direction(PinConfig pin)
-{
-    switch (pin.ddr) 
-    {
-        case Reg_B:
-            SET_VAL_BIT(DDRB, pin.pin);
-            break;
-
-        case Reg_C:
-            SET_VAL_BIT(DDRC, pin.pin);
-            break;
-
-        case Reg_D:
-            SET_VAL_BIT(DDRD, pin.pin);
-            break;
-    }
-    
-}
-```
-
-- segement_dir();
+- segement_dir(): This function configures the direction of all segment pins (A-G) of the 5461AS display.
 
 ```
 void segement_dir(PinConfig seg_arr[segments])
@@ -148,7 +142,7 @@ void segement_dir(PinConfig seg_arr[segments])
 
 ```
 
-- dp_dir();
+- dp_dir(): This function configures the direction of the decimal point (DP) pins of the 5461AS display.
 
 ```
 void dp_dir(PinConfig dp_arr[dp])
@@ -161,7 +155,7 @@ void dp_dir(PinConfig dp_arr[dp])
 
 ```
 
-- digit_dir();
+- digit_dir(): This function configures the direction of all digit pins (DIG1-4) of the 5461AS display.
 
 ```
 void digit_dir(PinConfig d_arr[digits])
@@ -174,16 +168,12 @@ void digit_dir(PinConfig d_arr[digits])
 
 ```
 
-### 4.3. segment, dp & digit state
+### 3.3. segment, dp & digit state
 
-- configure_pin_state();
+- segement_state(): This function sets the state of a segment pin (A-G) of the 5461AS display.
 
-```
-(I think the function needs optimization !!)
-
-```
-
-- segement_state();
+    - PinConfig SEG: PinConfig structures representing the segment pin of the 5461AS display.
+    - Uch8 STATE: The state (high/low) to which the segment pin or decimal point pin is to be set.
 
 ```
 void segement_state(PinConfig SEG, Uch8 STATE)
@@ -193,7 +183,10 @@ void segement_state(PinConfig SEG, Uch8 STATE)
 
 ```
 
-- dp_state();
+- dp_state(): This function sets the state of a decimal point (DP) pin of the 5461AS display.
+
+    - PinConfig dp_x: PinConfig structures representing the decimal point pin of the 5461AS display.
+    - Uch8 STATE: The state (high/low) to which the segment pin or decimal point pin is to be set.
 
 ```
 void dp_state(PinConfig dp_x, Uch8 STATE)
@@ -202,7 +195,9 @@ void dp_state(PinConfig dp_x, Uch8 STATE)
 }
 ```
 
-- digit_state();
+- digit_state(): This function sets the state of a digit pin (DIG1-4) of the 5461AS display.
+
+    - PinConfig DIG: A PinConfig structure representing the digit pin (DIG1-4) of the 5461AS display.
 
 ```
 void digit_state(PinConfig DIG)
@@ -211,9 +206,9 @@ void digit_state(PinConfig DIG)
 }
 ```
 
-### 4.4. display initialisation 
+### 3.4. display initialisation 
 
-- digit-init(); (je pense que khas tbdli liha smiya)
+- digit-init(): This function initializes all digit pins (DIG1-4) of the 5461AS display to a predefined state.
 
 ```
 void digit_init(PinConfig d_arr[digits])
@@ -225,8 +220,7 @@ void digit_init(PinConfig d_arr[digits])
 }
 ```
 
-### 4.5. macros
-
 ## 5. Contributing
-## 6. License
+
+Any contributions are welcomed to optimize and enhance this driver for the 5461AS display. If you're interested in improving the efficiency, performance, or adding new features to the driver, I encourage you to contribute. Whether it's refactoring code for better readability, optimizing algorithms for faster execution, or suggesting new functionalities, your contributions are highly valued. Feel free to fork the repository, make your modifications, and submit pull requests. 
 
