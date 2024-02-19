@@ -1,3 +1,26 @@
+/*
+ * Copyright 2024 Oumaima Marzak
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+
 #include "5461AS.h"
 #include "dio.h"
 #include "DataTypes.h"
@@ -6,23 +29,6 @@
 
 
 #define num_display  1999
-
-/*
-
-    PinConfig seg_a =  {PD3, Reg_D, Reg_D};  // 11
-    PinConfig seg_b =  {PD4, Reg_D, Reg_D};  // 7
-    PinConfig seg_c =  {PD7, Reg_D, Reg_D};  // 4
-    PinConfig seg_d =  {PB0, Reg_B, Reg_B};  // 2
-    PinConfig seg_e =  {PB1, Reg_B, Reg_B};  // 1
-    PinConfig seg_f =  {PD2, Reg_D, Reg_D};  // 10
-    PinConfig seg_g =  {PD6, Reg_D, Reg_D};  // 5
-                                             // 3 for dp   
-    PinConfig d_1 = {PB2, Reg_B, Reg_B};     //12
-    PinConfig d_2 = {PB3, Reg_B, Reg_B};     //9
-    PinConfig d_3 = {PB4, Reg_B, Reg_B};     //8 
-    PinConfig d_4 = {PB5, Reg_B, Reg_B};     //6
-
-*/
 
 
 void main()
@@ -61,27 +67,23 @@ void main()
         thousands = (i / 1000) % 10;
 
         // Display the digits based on the number value
-        digit_init(d_arr);
         display_number(seg_arr, d_arr, d4, ones);
         _delay_ms(5); 
 
         if (i >= 10)
         {
-            digit_init(d_arr);
             display_number(seg_arr, d_arr, d3, tens);
             _delay_ms(5); 
         }
 
         if (i >= 100)
         {
-            digit_init(d_arr);
             display_number(seg_arr, d_arr, d2, hundreds);
             _delay_ms(5); 
         }
 
         if (i >= 1000)
         {
-            digit_init(d_arr);
             display_number(seg_arr, d_arr, d1, thousands);
             _delay_ms(5); 
         }
@@ -89,19 +91,15 @@ void main()
 
     while (1)
     {
-        digit_init(d_arr);
         display_number(seg_arr, d_arr, d4, ones); 
         _delay_ms(1); 
 
-        digit_init(d_arr);
         display_number(seg_arr, d_arr, d3, tens); 
         _delay_ms(1);
 
-        digit_init(d_arr);
         display_number(seg_arr, d_arr, d2, hundreds); 
         _delay_ms(1); 
 
-        digit_init(d_arr);
         display_number(seg_arr, d_arr, d1, thousands); 
         _delay_ms(1); 
     }
