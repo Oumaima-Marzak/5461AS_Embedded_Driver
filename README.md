@@ -2,53 +2,41 @@
 
 
 ## 1. Introduction
- The 5461AS is a model of 7-segment LED display that consists of 4 digit (DIG1..4), each one controls 7-segments labeled A though G and a decimal point (dp). 
 
-![Alt text](<Screenshot from 2024-02-18 18-19-28.png>)
+ The 5461AS is a common model of 7-segment LED displays widely utilized in various electronic projects and devices. Each display comprises four digits (DIG1..4), with each digit controlling seven segments labeled A through G and a decimal point (dp). These displays find applications in digital clocks, timers, counters, and similar devices for displaying numerical information.
 
-![Alt text](<Screenshot from 2024-02-18 18-26-49.png>)
+ Interfacing with the 5461AS display can be challenging due to the multiple pins involved. For example, displaying the number 8 on digit 4 requires all segments (A, B, C ... G) to be turned on, necessitating 8 pins to be set to high state. However, Not all microcontrollers offer digital I/O registers with a sufficient number of pins readily available for connecting to all segments of a 7-segment LED display. For instance, let's consider the ATmega328P microcontroller, a popular choice found on the Arduino Uno board. While it boasts two 8-bit registers, namely PORTD and PORTB, for managing digital I/O pins state, the available pins are not universally dedicated solely to digital I/O operations.
 
- These displays are widely used in various electronic projects and devices for displaying numerical information. They are relatively simple to interface with microcontrollers and are often used in digital clocks, timers, counters and other similar applications. 
+ The ATmega328P on Arduino Uno board, only specific pins within these registers are designated for digital input and output. For example, on PORTD, pins PD2 to PD7 typically handle digital I/O, while PD0 and PD1 are often reserved for communication purposes like UART (Universal Asynchronous Receiver-Transmitter). Similarly, on PORTB, only pins PB0 to PB5 are commonly used for digital I/O tasks.
 
-
-
-
-- Numbers truth table :
-
-| num | A | B | C | D | E | F | G | Hex |
-|-----|---|---|---|---|---|---|---|-----|
-| 0   | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0x7E|
-| 1   | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0x30|
-| 2   | 1 | 1 | 0 | 1 | 1 | 0 | 1 | 0x6D|
-| 3   | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0x79|
-| 4   | 0 | 1 | 1 | 0 | 0 | 1 | 1 | 0x33|
-| 5   | 1 | 0 | 1 | 1 | 0 | 1 | 1 | 0x5B|
-| 6   | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 0x5F|
-| 7   | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0x70|
-| 8   | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0x7F|
-| 9   | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0x7B|
-
-
-- Caracters truth table :
-
-| car | A | B | C | D | E | F | G | Hex |
-|-----|---|---|---|---|---|---|---|-----|
-| A   | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0x7E|
-| C   | 1 | 0 | 0 | 1 | 1 | 1 | 1 | 0x30|
-| E   | 1 | 0 | 0 | 1 | 1 | 1 | 1 | 0x6D|
-| F   | 1 | 0 | 0 | 0 | 1 | 1 | 1 | 0x79|
+ To address these challenges, this driver has been developed to simplify the interfacing process with the 5461AS display. It enables connecting the segments to any digital pin on the microcontroller without worrying about segment rankings. Additionally, the driver facilitates the display of numbers from 0 to 9 on any digit from 1 to 4. Furthermore, it supports the display of four letters: A, C, E, and F.
 
    
 ## 2. Features
+ 1. Flexible Pin Assignment: 
+
+ This driver offers the flexibility to assign digital pins for interfacing with the 5461AS display, accommodating different microcontroller pin configurations. This feature allows users to easily adapt the driver to their specific hardware setup, ensuring seamless integration with minimal effort.
+
+ 2. Easy Interfacing: 
+
+ Simplifying the interfacing process, this driver abstracts away the complexities of managing multiple pins and segment rankings associated with the 5461AS display. Users can focus on their application logic without worrying about the intricacies of low-level hardware interactions.
+
+ 3. Support for Numeric Display: 
+
+ With built-in support for numeric characters (0-9), this driver enables users to display numerical information on any of the four digits (DIG1..4) of the 5461AS display effortlessly. This feature facilitates the implementation of applications such as digital clocks, timers, and counters with ease.
+
+ 4. Support for Letter Display: 
+
+ In addition to numeric characters, this driver allows the display of letters A, C, E, and F on the 5461AS display. This feature enhances the versatility of the display, enabling a wider range of applications, including alphanumeric data presentation and messaging systems.
+
+ 5. Portability Across Platforms: 
+
+ This driver ensures compatibility with various microcontroller platforms, making it suitable for a wide range of hardware configurations. 
 
 ## 3. Requirements
 
-## 4. Usage
-### 4.1. Basic Usage
-### 4.2. Example Code
-
-## 5. Driver Documentation
-### 5.1. display numbers & caracters
+## 4. Driver Documentation
+### 4.1. display numbers & caracters
 
 - display_number();
 
@@ -122,7 +110,7 @@ ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits
 
 ```
 
-### 5.2. segment, dp & digit direction
+### 4.2. segment, dp & digit direction
 
 - configure_pin_direction();
 
@@ -186,7 +174,7 @@ void digit_dir(PinConfig d_arr[digits])
 
 ```
 
-### 5.3. segment, dp & digit state
+### 4.3. segment, dp & digit state
 
 - configure_pin_state();
 
@@ -223,7 +211,7 @@ void digit_state(PinConfig DIG)
 }
 ```
 
-### 5.4. display initialisation 
+### 4.4. display initialisation 
 
 - digit-init(); (je pense que khas tbdli liha smiya)
 
@@ -237,8 +225,8 @@ void digit_init(PinConfig d_arr[digits])
 }
 ```
 
-### 5.5. macros
+### 4.5. macros
 
-## 6. Contributing
-## 7. License
+## 5. Contributing
+## 6. License
 
