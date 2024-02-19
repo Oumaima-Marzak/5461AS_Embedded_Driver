@@ -4,6 +4,28 @@
 *
 */
 
+/*
+ * Copyright 2024 Oumaima Marzak
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 #include "5461AS.h"
 #include "DataTypes.h"
 #include "BitConfig.h"
@@ -29,9 +51,9 @@ void digit_dir(PinConfig d_arr[digits])
     }
 }
 
-void dp_dir(PinConfig dp_arr[dp])
+void dp_dir(PinConfig dp_arr[dpx])
 {
-    for (int i = 0; i < dp; i++)
+    for (int i = 0; i < dpx; i++)
     {
         configure_pin_direction(dp_arr[i]);
     }
@@ -69,7 +91,8 @@ ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits],
     }
 
     else 
-    {
+    {   
+        digit_init(d_arr);
         digit_state(d_arr[digit]); 
     
         if (number >= 0 && number <= 9)
@@ -93,7 +116,8 @@ ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits
     }
 
     else 
-    {
+    {   
+        digit_init(d_arr);
         digit_state(d_arr[digit]); // Set digit state
 
         Uch8 charIndex = 0;
