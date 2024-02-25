@@ -2,13 +2,13 @@
 
 ## 1. Introduction
 
- The 5461AS is a common model of 7-segment LED displays widely utilized in various electronic projects and devices. Each display comprises four digits (DIG1..4), with each digit controlling seven segments labeled A through G and a decimal point (dp). These displays find applications in digital clocks, timers, counters, and similar devices for displaying numerical information.
+ The 5461AS is a common model of 7-segment LED displays widely utilized in various electronic projects and devices. The model comprises four digits (DIG1..4), with each digit controlling seven segments labeled A through G and a decimal point (dp). These displays find applications in digital clocks, timers, counters, and similar devices for displaying numerical information.
 
- Interfacing with the 5461AS display can be challenging due to the multiple pins involved. For example, displaying the number 8 on digit 4 requires all segments (A, B, C ... G) to be turned on, necessitating 8 pins to be set to high state. However, Not all microcontrollers offer digital I/O registers with a sufficient number of pins readily available for connecting to all segments of a 7-segment LED display. For instance, let's consider the ATmega328P microcontroller, a popular choice found on the Arduino Uno board. While it boasts two 8-bit registers, namely PORTD and PORTB, for managing digital I/O pins state, the available pins are not universally dedicated solely to digital I/O operations.
+ Interfacing with the 5461AS display can be challenging due to the multiple pins involved. For example, displaying the number 8 on one of the digits requires all segments (A, B, C ... G) to be turned on, necessitating 7 pins to be set to a high state. This means that the pins should be connected rankily to one register of 8 bits to facilitate the assignment of the value 0x7F (representing that all 7 pins are in a high state). However, this approach may not be applicable for all microcontrollers.
 
- The ATmega328P on Arduino Uno board, only specific pins within these registers are designated for digital input and output. For example, on PORTD, pins PD2 to PD7 typically handle digital I/O, while PD0 and PD1 are often reserved for communication purposes like UART (Universal Asynchronous Receiver-Transmitter). Similarly, on PORTB, only pins PB0 to PB5 are commonly used for digital I/O tasks.
+ For instance, let's consider the ATmega328P microcontroller on the Arduino Uno board. While it has two 8-bit registers, namely PORTD and PORTB, for managing digital I/O pin states, not all pins controlled by those registers are dedicated to digital I/O. On PORTD, pins PD2 to PD7 typically handle digital I/O, while PD0 and PD1 are reserved for UART communication (on the Arduino Uno board). Similarly, on PORTB, only pins PB0 to PB5 are used for digital I/O tasks.
 
- To address these challenges, this driver has been developed to simplify the interfacing process with the 5461AS display. It enables connecting the segments to any digital pin on the microcontroller without worrying about segment rankings. Additionally, the driver facilitates the display of numbers from 0 to 9 on any digit from 1 to 4. Furthermore, it supports the display of four letters: A, C, E, and F.
+ To address these challenges, this driver has been developed to simplify the interfacing process with the 5461AS display. It enables connecting the segments to any digital pin on the microcontroller without worrying about segment rankings. Additionally, the driver facilitates the display of numbers from 0 to 9 and four letters: A, C, E, and F on any digit from 1 to 4.
 
    
 ## 2. Features
@@ -47,7 +47,7 @@
 
     - Uch8 number: The number (0-9) to display on the specified digit.
 
-```
+```c_cpp
 ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 number)
 {
     
@@ -85,7 +85,7 @@ ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits],
 
     - Uch8 caracter: The character ('A', 'C', 'E', or 'F') to display on the specified digit.
 
-```
+```c_cpp
 ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 caracter)
 {
     if (digit < 1 || digit > digits + 1 )
@@ -131,7 +131,7 @@ ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits
 
 - segement_dir(): This function configures the direction of all segment pins (A-G) of the 5461AS display.
 
-```
+```c_cpp
 void segement_dir(PinConfig seg_arr[segments])
 {
     for (int i = 0; i < segments; i++)
@@ -144,7 +144,7 @@ void segement_dir(PinConfig seg_arr[segments])
 
 - dp_dir(): This function configures the direction of the decimal point (DP) pins of the 5461AS display.
 
-```
+```c_cpp
 void dp_dir(PinConfig dp_arr[dp])
 {
     for (int i = 0; i < dp; i++)
@@ -157,7 +157,7 @@ void dp_dir(PinConfig dp_arr[dp])
 
 - digit_dir(): This function configures the direction of all digit pins (DIG1-4) of the 5461AS display.
 
-```
+```c_cpp
 void digit_dir(PinConfig d_arr[digits])
 {
     for (int i = 0; i < digits; i++)
@@ -175,7 +175,7 @@ void digit_dir(PinConfig d_arr[digits])
     - PinConfig SEG: PinConfig structures representing the segment pin of the 5461AS display.
     - Uch8 STATE: The state (high/low) to which the segment pin or decimal point pin is to be set.
 
-```
+```c_cpp
 void segement_state(PinConfig SEG, Uch8 STATE)
 {
     configure_pin_state(SEG, STATE);
@@ -188,7 +188,7 @@ void segement_state(PinConfig SEG, Uch8 STATE)
     - PinConfig dp_x: PinConfig structures representing the decimal point pin of the 5461AS display.
     - Uch8 STATE: The state (high/low) to which the segment pin or decimal point pin is to be set.
 
-```
+```c_cpp
 void dp_state(PinConfig dp_x, Uch8 STATE)
 {
     configure_pin_state(dp_x, STATE);
@@ -199,7 +199,7 @@ void dp_state(PinConfig dp_x, Uch8 STATE)
 
     - PinConfig DIG: A PinConfig structure representing the digit pin (DIG1-4) of the 5461AS display.
 
-```
+```c_cpp
 void digit_state(PinConfig DIG)
 {
     clear_pin_state(DIG);
@@ -208,9 +208,9 @@ void digit_state(PinConfig DIG)
 
 ### 3.4. display initialization 
 
-- digit-init(): This function initializes all digit pins (DIG1-4) of the 5461AS display to a predefined state.
+- digit-init(): This function initializes all digit pins (DIG1-4) of the 5461AS display.
 
-```
+```c_cpp
 void digit_init(PinConfig d_arr[digits])
 {
     for (int i = 0; i < digits; i++)
@@ -220,7 +220,8 @@ void digit_init(PinConfig d_arr[digits])
 }
 ```
 
-## 5. Contributing
+## 4.Notes
 
-Any contributions are welcomed to optimize and enhance this driver for the 5461AS display. If you're interested in improving the efficiency, performance, or adding new features to the driver, I encourage you to contribute. Whether it's refactoring code for better readability, optimizing algorithms for faster execution, or suggesting new functionalities, your contributions are highly valued. Feel free to fork the repository, make your modifications, and submit pull requests. 
+ The driver has been tested with the Atmega328p microcontroller on the Arduino Uno board, and it is primarily designed to work with the digital I/O (DIO) driver of that specific microcontroller. If you are using the same microcontroller, you can find its drivers in the repository [Atmega328p_Drivers](https://github.com/Oumaima-Marzak/Atmega328p_Drivers).
 
+ For compatibility with other microcontrollers, the driver requires adaptations in terms of the names and addresses of digital I/O registers used. Based on that, some functions may need adjustments to align with the architecture of the target microcontroller.
