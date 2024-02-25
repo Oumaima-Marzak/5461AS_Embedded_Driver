@@ -89,6 +89,10 @@ void main()
         }
     }
 
+    /*
+    This infinite loop was used to maintain the display of the number to be displayed.
+    */
+
     while (1)
     {
         display_number(seg_arr, d_arr, d4, ones); 
