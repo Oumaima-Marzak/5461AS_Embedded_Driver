@@ -39,7 +39,7 @@ void segement_dir(PinConfig seg_arr[segments])
 {
     for (int i = 0; i < segments; i++)
     {
-        configure_pin_direction(seg_arr[i]);
+        configure_pin_direction(seg_arr[i], OUT);
     }
 }
 
@@ -47,7 +47,7 @@ void digit_dir(PinConfig d_arr[digits])
 {
     for (int i = 0; i < digits; i++)
     {
-        configure_pin_direction(d_arr[i]);
+        configure_pin_direction(d_arr[i], OUT);
     }
 }
 
@@ -55,7 +55,7 @@ void dp_dir(PinConfig dp_arr[dpx])
 {
     for (int i = 0; i < dpx; i++)
     {
-        configure_pin_direction(dp_arr[i]);
+        configure_pin_direction(dp_arr[i], OUT);
     }
 }
 

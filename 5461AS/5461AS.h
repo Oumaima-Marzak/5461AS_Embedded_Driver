@@ -72,8 +72,8 @@ typedef enum
 
 #define numbers    10  /* 0 to 9 */
 #define caracters   4  /* A, C, E and F */ 
-#define segments    7  /* a, b, c, d, e, f and g */
 
+#define segments    7  /* a, b, c, d, e, f and g */
 #define digits      4  /* d1, d2, d3 and d4 */
 #define dpx         4  /* dp1, dp2, dp3 and dp4 */
 
