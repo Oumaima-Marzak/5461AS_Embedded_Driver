@@ -33,6 +33,8 @@ void main()
     segement_dir(seg_arr);
     digit_dir(d_arr);
 
+    adc_ref_config(ADC_REF_AVCC);
+    adc_prescaler_config(ADC_PRESCALER_128);
     adc_init();
 
     while(1)
@@ -64,8 +66,6 @@ void main()
         {
             display_number(seg_arr, d_arr, d1, thousands);
             _delay_ms(5); 
-        }
-
-        
+        }        
     }    
 }
