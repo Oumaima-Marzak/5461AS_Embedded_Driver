@@ -73,9 +73,30 @@ typedef enum
 #define numbers    10  /* 0 to 9 */
 #define caracters   4  /* A, C, E and F */ 
 
-#define segments    7  /* a, b, c, d, e, f and g */
-#define digits      4  /* d1, d2, d3 and d4 */
-#define dpx         4  /* dp1, dp2, dp3 and dp4 */
+#define segments    7  
+    /*
+    
+        A  ==> 11
+        B  ==> 7
+        C  ==> 4
+        D  ==> 2
+        E  ==> 1
+        F  ==> 10
+        G  ==> 5
+        DP ==> 3
+    
+    */
+   
+#define digits      4  
+
+    /*
+
+        DIG1 ==> 12
+        DIG2 ==> 9
+        DIG3 ==> 8
+        DIG4 ==> 6
+
+    */
 
 #define a           0   
 #define b           1
@@ -90,11 +111,6 @@ typedef enum
 #define d3          2
 #define d4          3
 
-#define dp1         0
-#define dp2         1
-#define dp3         2
-#define dp4         3
-
 
 /* Numbers from 0 to 9 */
 #define NumbersOnBinary {{1,1,1,1,1,1,0}, {0,1,1,0,0,0,0}, {1,1,0,1,1,0,1}, {1,1,1,1,0,0,1}, {0,1,1,0,0,1,1}, {1,0,1,1,0,1,1}, {1,0,1,1,1,1,1}, {1,1,1,0,0,0,0}, {1,1,1,1,1,1,1}, {1,1,1,1,0,1,1}}
@@ -106,7 +122,7 @@ void digit_init(PinConfig d_arr[digits]);
 
 void segement_dir(PinConfig seg_arr[segments]);
 void digit_dir(PinConfig d_arr[digits]);
-void dp_dir(PinConfig dp_arr[dpx]);
+void dp_dir(PinConfig dp);
 
 
 void segement_state(PinConfig SEG, Uch8 STATE);

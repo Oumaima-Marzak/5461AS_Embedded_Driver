@@ -37,7 +37,7 @@ static Uch8 CarArr[caracters][segments] = CaractersOnBinary;
 
 void segement_dir(PinConfig seg_arr[segments])
 {
-    for (int i = 0; i < segments; i++)
+    for (Uch8 i = 0; i < segments; i++)
     {
         configure_pin_direction(seg_arr[i], OUT);
     }
@@ -45,18 +45,15 @@ void segement_dir(PinConfig seg_arr[segments])
 
 void digit_dir(PinConfig d_arr[digits])
 {
-    for (int i = 0; i < digits; i++)
+    for (Uch8 i = 0; i < digits; i++)
     {
         configure_pin_direction(d_arr[i], OUT);
     }
 }
 
-void dp_dir(PinConfig dp_arr[dpx])
+void dp_dir(PinConfig dp)
 {
-    for (int i = 0; i < dpx; i++)
-    {
-        configure_pin_direction(dp_arr[i], OUT);
-    }
+    configure_pin_direction(dp, OUT);
 }
 
 void segement_state(PinConfig SEG, Uch8 STATE)
@@ -69,14 +66,14 @@ void digit_state(PinConfig DIG)
     clear_pin_state(DIG);
 }
 
-void dp_state(PinConfig dp_x, Uch8 STATE)
+void dp_state(PinConfig dp, Uch8 STATE)
 {
-    configure_pin_state(dp_x, STATE);
+    configure_pin_state(dp, STATE);
 }
 
 void digit_init(PinConfig d_arr[digits])
 {
-    for (int i = 0; i < digits; i++)
+    for (Uch8 i = 0; i < digits; i++)
     {
         set_pin_state(d_arr[i]);
     }    
@@ -97,7 +94,7 @@ ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits],
     
         if (number >= 0 && number <= 9)
         {
-            for (int i = 0; i < segments; i++)
+            for (Uch8 i = 0; i < segments; i++)
             {
                 segement_state(seg_arr[i], NumArr[number][i]);
             }
@@ -117,12 +114,11 @@ ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits
 
     else 
     {   
-        digit_init(d_arr);
-        digit_state(d_arr[digit]); // Set digit state
 
         Uch8 charIndex = 0;
 
-        switch (caracter) {
+        switch (caracter) 
+        {
             case 'A':
                 charIndex = 0;
                 break;
@@ -137,15 +133,19 @@ ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits
                 break;
         }
 
-        for (int i = 0; i < segments; i++) 
+        for (Uch8 i = 0; i < segments; i++) 
         {
             segement_state(seg_arr[i], CarArr[charIndex][i]);
         }
+        
+        digit_init(d_arr);
+        digit_state(d_arr[digit]); // Set digit state
 
         return _OK;
 
     }
 
 }
+
 
 
