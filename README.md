@@ -47,7 +47,7 @@
 
     - Uch8 number: The number (0-9) to display on the specified digit.
 
-```c_cpp
+```c
 ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 number)
 {
     
@@ -85,7 +85,7 @@ ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits],
 
     - Uch8 caracter: The character ('A', 'C', 'E', or 'F') to display on the specified digit.
 
-```c_cpp
+```c
 ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits], Uch8 digit, Uch8 caracter)
 {
     if (digit < 1 || digit > digits + 1 )
@@ -131,7 +131,7 @@ ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits
 
 - segement_dir(): This function configures the direction of all segment pins (A-G) of the 5461AS display.
 
-```c_cpp
+```c
 void segement_dir(PinConfig seg_arr[segments])
 {
     for (int i = 0; i < segments; i++)
@@ -144,7 +144,7 @@ void segement_dir(PinConfig seg_arr[segments])
 
 - dp_dir(): This function configures the direction of the decimal point (DP) pins of the 5461AS display.
 
-```c_cpp
+```c
 void dp_dir(PinConfig dp_arr[dp])
 {
     for (int i = 0; i < dp; i++)
@@ -157,7 +157,7 @@ void dp_dir(PinConfig dp_arr[dp])
 
 - digit_dir(): This function configures the direction of all digit pins (DIG1-4) of the 5461AS display.
 
-```c_cpp
+```c
 void digit_dir(PinConfig d_arr[digits])
 {
     for (int i = 0; i < digits; i++)
@@ -175,7 +175,7 @@ void digit_dir(PinConfig d_arr[digits])
     - PinConfig SEG: PinConfig structures representing the segment pin of the 5461AS display.
     - Uch8 STATE: The state (high/low) to which the segment pin or decimal point pin is to be set.
 
-```c_cpp
+```c
 void segement_state(PinConfig SEG, Uch8 STATE)
 {
     configure_pin_state(SEG, STATE);
@@ -188,7 +188,7 @@ void segement_state(PinConfig SEG, Uch8 STATE)
     - PinConfig dp_x: PinConfig structures representing the decimal point pin of the 5461AS display.
     - Uch8 STATE: The state (high/low) to which the segment pin or decimal point pin is to be set.
 
-```c_cpp
+```c
 void dp_state(PinConfig dp_x, Uch8 STATE)
 {
     configure_pin_state(dp_x, STATE);
@@ -199,7 +199,7 @@ void dp_state(PinConfig dp_x, Uch8 STATE)
 
     - PinConfig DIG: A PinConfig structure representing the digit pin (DIG1-4) of the 5461AS display.
 
-```c_cpp
+```c
 void digit_state(PinConfig DIG)
 {
     clear_pin_state(DIG);
@@ -210,7 +210,7 @@ void digit_state(PinConfig DIG)
 
 - digit-init(): This function initializes all digit pins (DIG1-4) of the 5461AS display.
 
-```c_cpp
+```c
 void digit_init(PinConfig d_arr[digits])
 {
     for (int i = 0; i < digits; i++)
