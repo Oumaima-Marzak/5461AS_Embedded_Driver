@@ -58,6 +58,7 @@ ErrorStatus display_number(PinConfig seg_arr[segments], PinConfig d_arr[digits],
 
     else 
     {
+        digit_init(d_arr);
         digit_state(d_arr[digit]); 
     
         if (number >= 0 && number <= 9)
@@ -95,7 +96,8 @@ ErrorStatus display_caracter(PinConfig seg_arr[segments], PinConfig d_arr[digits
 
     else 
     {
-        digit_state(d_arr[digit]); // Set digit state
+        digit_init(d_arr);
+        digit_state(d_arr[digit]); 
 
         Uch8 charIndex = 0;
 
@@ -142,15 +144,12 @@ void segement_dir(PinConfig seg_arr[segments])
 
 ```
 
-- dp_dir(): This function configures the direction of the decimal point (DP) pins of the 5461AS display.
+- dp_dir(): This function configures the direction of the decimal point (DP) pin of the 5461AS display.
 
 ```c
-void dp_dir(PinConfig dp_arr[dp])
+void dp_dir(PinConfig dp)
 {
-    for (int i = 0; i < dp; i++)
-    {
-        configure_pin_direction(dp_arr[i]);
-    }
+    configure_pin_direction(dp);
 }
 
 ```
@@ -185,13 +184,13 @@ void segement_state(PinConfig SEG, Uch8 STATE)
 
 - dp_state(): This function sets the state of a decimal point (DP) pin of the 5461AS display.
 
-    - PinConfig dp_x: PinConfig structures representing the decimal point pin of the 5461AS display.
+    - PinConfig dp: PinConfig structures representing the decimal point pin of the 5461AS display.
     - Uch8 STATE: The state (high/low) to which the segment pin or decimal point pin is to be set.
 
 ```c
-void dp_state(PinConfig dp_x, Uch8 STATE)
+void dp_state(PinConfig dp, Uch8 STATE)
 {
-    configure_pin_state(dp_x, STATE);
+    configure_pin_state(dp, STATE);
 }
 ```
 
